@@ -1,0 +1,14 @@
+site:
+  title: "UrsaLog"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/ursafun.js"
+      api: "build/libs/ursafun.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/ursafun.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
