@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . .
 
 # Run the Kobweb export command to compile the frontend and backend for production
-RUN ./gradlew kobwebExport --layout fullstack
+# Added "clean" for safety, and removed the invalid --layout flag!
+RUN ./gradlew clean kobwebExport
 
 # Expose the port Kobweb runs on
 EXPOSE 8080
