@@ -1,5 +1,5 @@
-# Use a standard Java environment to run the Kotlin server
-FROM eclipse-temurin:17-jre
+# Use a standard Java Development Kit (JDK) to compile the Kotlin code
+FROM eclipse-temurin:17-jdk
 
 # Set the working directory inside the server
 WORKDIR /app
@@ -8,7 +8,6 @@ WORKDIR /app
 COPY . .
 
 # Run the Kobweb export command to compile the frontend and backend for production
-# We use the gradle wrapper included in your project
 RUN ./gradlew kobwebExport --layout fullstack
 
 # Expose the port Kobweb runs on
