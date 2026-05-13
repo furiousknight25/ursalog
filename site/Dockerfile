@@ -1,5 +1,6 @@
-# Use a standard Java Development Kit (JDK) to compile the Kotlin code
-FROM eclipse-temurin:17-jdk
+# Use the official Microsoft Playwright Java image
+# This includes JDK 17 AND all the Linux OS dependencies needed to run headless browsers
+FROM mcr.microsoft.com/playwright/java:v1.40.0-jammy
 
 # Set the working directory inside the server
 WORKDIR /app
@@ -7,8 +8,7 @@ WORKDIR /app
 # Copy your project files into the container
 COPY . .
 
-# Run the Kobweb export command to compile the frontend and backend for production
-# Added "clean" for safety, and removed the invalid --layout flag!
+# Run the Kobweb export command safely
 RUN ./gradlew clean kobwebExport
 
 # Expose the port Kobweb runs on
