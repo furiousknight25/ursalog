@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    kotlin("plugin.serialization") version "2.3.20"
 }
 
 group = "org.example.ursafun"
@@ -21,12 +22,12 @@ kobweb {
 kotlin {
     // This example is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
     // and the `jvmMain` source set below.
-    configAsKobwebApplication("ursafun" /*, includeServer = true*/)
+    configAsKobwebApplication("ursafun" , includeServer = true)
 
     sourceSets {
-//        commonMain.dependencies {
-//          // Add shared dependencies between JS and JVM here if building a fullstack app
-//        }
+        commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+        }
 
         jsMain.dependencies {
             implementation(libs.compose.runtime)
@@ -40,8 +41,11 @@ kotlin {
         }
 
         // Uncomment the following if you pass `includeServer = true` into the `configAsKobwebApplication` call.
-//        jvmMain.dependencies {
-//            compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
-//        }
+        jvmMain.dependencies {
+            compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
+            implementation("org.jetbrains.exposed:exposed-core:0.45.0")
+            implementation("org.jetbrains.exposed:exposed-jdbc:0.45.0")
+            implementation("org.xerial:sqlite-jdbc:3.42.0.0")
+        }
     }
 }
