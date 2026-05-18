@@ -1,8 +1,7 @@
 # Use the official Microsoft Playwright Java image
-# This includes JDK 17 AND all the Linux OS dependencies needed to run headless browsers
 FROM mcr.microsoft.com/playwright/java:v1.40.0-jammy
 
-# Set the working directory inside the server
+# Set the initial working directory
 WORKDIR /app
 
 # Copy your project files into the container
@@ -14,5 +13,8 @@ RUN ./gradlew clean kobwebExport
 # Expose the port Kobweb runs on
 EXPOSE 8080
 
+# MOVE into the sub-folder where Kobweb actually built your project
+WORKDIR /app/site
+
 # Tell the server how to start the app
-CMD ["java", "-jar", "site/.kobweb/server/server.jar"]
+CMD ["java", "-jar", ".kobweb/server/server.jar"]
