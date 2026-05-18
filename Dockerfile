@@ -15,4 +15,4 @@ RUN ./gradlew clean kobwebExport
 EXPOSE 8080
 
 # Tell the server how to start the app
-CMD ["java", "-jar", ".kobweb/server/kobweb-server.jar"]
+CMD ["java", "-jar", "site/.kobweb/server/server.jar"]
